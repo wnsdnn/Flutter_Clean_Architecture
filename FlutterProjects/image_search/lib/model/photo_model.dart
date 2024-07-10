@@ -18,7 +18,7 @@ class PhotoModel {
   final int collections;
   final int likes;
   final int comments;
-  final int userId;
+  final int user_id;
   final String user;
   final String userImageURL;
 
@@ -42,7 +42,7 @@ class PhotoModel {
     required this.collections,
     required this.likes,
     required this.comments,
-    required this.userId,
+    required this.user_id,
     required this.user,
     required this.userImageURL,
   });
@@ -68,7 +68,7 @@ class PhotoModel {
       collections: json['collections'],
       likes: json['likes'],
       comments: json['comments'],
-      userId: json['userId'],
+      user_id: json['user_id'],
       user: json['user'],
       userImageURL: json['userImageURL'],
     );
@@ -95,7 +95,7 @@ class PhotoModel {
     _data['collections'] = collections;
     _data['likes'] = likes;
     _data['comments'] = comments;
-    _data['user_id'] = userId;
+    _data['user_id'] = user_id;
     _data['user'] = user;
     _data['userImageURL'] = userImageURL;
     return _data;
