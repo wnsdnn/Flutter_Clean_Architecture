@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final photoProvider = PhotoProvider.of(context);
+    final viewModel = PhotoProvider.of(context).viewModel;
 
     return DefaultLayout(
       appBar: AppBar(
@@ -51,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 suffixIcon: IconButton(
                   onPressed: () async {
                     final keyword = _controller.text;
-                    photoProvider.fetch(keyword);
+                    viewModel.fetch(keyword);
                   },
                   icon: Icon(Icons.search),
                 ),
@@ -59,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           StreamBuilder<List<PhotoModel>>(
-            stream: photoProvider.photoStream,
+            stream: viewModel.photoStream,
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Center(
