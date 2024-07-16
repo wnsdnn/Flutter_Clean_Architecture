@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:image_search/screen/home_view_mode.dart';
+import 'package:image_search/screen/home_view_model.dart';
 
 // InheritedWidget - 어떤 위젯트리에도 원하는 데이터를 꽃아줄수 있는 방법을 제공함 (상태관리)
 // 생성자로 계속 주기에는 위젯트리가 많아 졌을때 복잡해지기 때문에 InheritedWidget을 사용
