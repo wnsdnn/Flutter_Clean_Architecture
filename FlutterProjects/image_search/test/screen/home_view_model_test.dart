@@ -4,6 +4,7 @@ import 'package:image_search/model/photo_model.dart';
 import 'package:image_search/screen/home_view_model.dart';
 
 void main() {
+  // ViewModel 테스트
   test("Stream이 잘 동작해야 한다.", () async {
     final viewModel = HomeViewModel(repository: FakePhotoApiRepository());
 
