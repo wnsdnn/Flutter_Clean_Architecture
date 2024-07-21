@@ -19,7 +19,7 @@ class PhotoWidget extends StatelessWidget {
       ),
       clipBehavior: Clip.hardEdge,
       child: Image.network(
-        photo.webformatURL,
+        photo.previewURL,
         fit: BoxFit.cover,
       ),
     );
