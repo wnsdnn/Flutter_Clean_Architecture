@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:image_search/data/photo_provider.dart';
 import 'package:image_search/model/photo_model.dart';
 import 'package:image_search/screen/component/photo_widget.dart';
+import 'package:image_search/screen/home_view_model.dart';
 import 'package:image_search/screen/layout/default_layout.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = PhotoProvider.of(context).viewModel;
+    final viewModel = context.watch<HomeViewModel>();
 
     return DefaultLayout(
       appBar: AppBar(
