@@ -23,8 +23,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = context.watch<HomeViewModel>();
-
     return DefaultLayout(
       appBar: AppBar(
         title: const Text(
@@ -52,36 +50,28 @@ class _HomeScreenState extends State<HomeScreen> {
                 suffixIcon: IconButton(
                   onPressed: () async {
                     final keyword = _controller.text;
-                    viewModel.fetch(keyword);
+                    context.read<HomeViewModel>().fetch(keyword);
                   },
                   icon: Icon(Icons.search),
                 ),
               ),
             ),
           ),
-          StreamBuilder<List<PhotoModel>>(
-            stream: viewModel.photoStream,
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-
-              final photos = snapshot.data!;
-
+          Consumer<HomeViewModel>(
+            builder: (_, viewModel, child) {
               return Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(16),
                   child: GridView.builder(
-                    itemCount: photos.length,
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    itemCount: viewModel.photos.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       mainAxisSpacing: 16,
                       crossAxisSpacing: 16,
                     ),
                     itemBuilder: (context, index) {
-                      final photo = photos[index];
+                      final photo = viewModel.photos[index];
 
                       return PhotoWidget(
                         photo: photo,
@@ -90,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               );
-            }
+            },
           ),
         ],
       ),

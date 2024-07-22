@@ -1,16 +1,17 @@
 import 'dart:async';
+import 'dart:collection';
 
+import 'package:flutter/material.dart';
 import 'package:image_search/data/photo_api_repository.dart';
 import 'package:image_search/model/photo_model.dart';
 
-class HomeViewModel {
+class HomeViewModel with ChangeNotifier {
   final PhotoApiRepository repository;
 
-  // InheritedWidget안에는 불변객체만 있어야함
-  final _photoStreamController = StreamController<List<PhotoModel>>()
-    // Controller를 생성하면서 기본값 세팅
-    ..add([]);
-  Stream<List<PhotoModel>> get photoStream => _photoStreamController.stream;
+  List<PhotoModel> _photos = [];
+
+  // UnmodifiableListView - 수정 못하는 리스트
+  UnmodifiableListView<PhotoModel> get photos => UnmodifiableListView(_photos);
 
   HomeViewModel({
     required this.repository,
@@ -18,6 +19,7 @@ class HomeViewModel {
 
   Future<void> fetch(String query) async {
     final result = await repository.fetch(query);
-    _photoStreamController.add(result);
+    _photos = result;
+    notifyListeners();
   }
 }

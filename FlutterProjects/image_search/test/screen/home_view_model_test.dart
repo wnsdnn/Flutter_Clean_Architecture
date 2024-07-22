@@ -9,19 +9,10 @@ void main() {
     final viewModel = HomeViewModel(repository: FakePhotoApiRepository());
 
     await viewModel.fetch('apple');
-    await viewModel.fetch('iphone');
 
     final result = fakeJson.map((json) => PhotoModel.fromJson(json)).toList();
 
-    expect(
-      viewModel.photoStream,
-      emitsInOrder([
-        // 해당 변수값이 위에 선언한 stream에 의해 들어올 것이란걸 예측
-        equals([]),
-        equals(result),
-        equals(result),
-      ]),
-    );
+    expect(viewModel.photos, result);
   });
 }
 
